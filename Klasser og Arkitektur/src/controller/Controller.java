@@ -42,6 +42,9 @@ public abstract class Controller {
     public static ArrayList<Plads> getPladser() {
         return new ArrayList<Plads>(Storage.getPladser());
     }
+    public static int pladserBestiltForForestilling(Forestilling forestilling, LocalDate dato) {
+        return forestilling.antalBestiltePladserPåDag(dato);
+    }
 
     public static Bestilling opretBestillingMedPladser(Forestilling forestilling, Kunde kunde,
     LocalDate dato, ArrayList<Plads> pladser) {
@@ -66,7 +69,6 @@ public abstract class Controller {
                 bestilling.addPlads(e);
             }
             forestilling.addBestilling(bestilling);
-            Storage.storeBestilling(bestilling);
             kunde.addBestilling(bestilling);
         }
         return bestilling;

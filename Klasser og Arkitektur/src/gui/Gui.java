@@ -8,6 +8,8 @@ import javafx.geometry.VPos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import model.*;
 import storage.Storage;
@@ -78,10 +80,12 @@ public class Gui extends Application {
         Label lblStartDato = new Label("StartDato");
         pane.add(lblStartDato, 0,3);
         pane.add(txfStartDato,1,3);
+        txfStartDato.setPromptText("D/MM/YYYY");
 
         Label lblSlutDato = new Label("SlutDato");
         pane.add(lblSlutDato, 0,4);
         pane.add(txfSlutDato,1,4);
+        txfSlutDato.setPromptText("D/MM/YYYY");
 
         // Tilføjer Opret forestilling Knap
         pane.add(btnOpretForestilling,1,5);
@@ -97,6 +101,7 @@ public class Gui extends Application {
         Label lblPladsDato = new Label("Dato");
         pane.add(lblPladsDato, 6,2);
         pane.add(txfPladsDato,7,2);
+        txfPladsDato.setPromptText("D/MM/YYYY");
 
         // Tilføjer Opret kunde Knap
         pane.add(btnOpretKunde,4,4);
@@ -209,6 +214,7 @@ public class Gui extends Application {
                 for (int i = 0; i < bestilling.getPladser().size(); i++) {
                     pladser += bestilling.getPladser().get(i).toString() + "\n";
                 }
+                pladser += "\nSamlede Pris: " + bestilling.samletPris();
                 success.setContentText(pladser);
                 success.show();
             } else {
@@ -227,22 +233,6 @@ public class Gui extends Application {
             }
     }
     public void statistikOnAction() {
-        /*
-        Forestilling forestilling = lvwForestillinger.getSelectionModel().getSelectedItem();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
-        String strengDato = txfTestDato.getText().trim();
-        LocalDate dato = null;
-        try {
-            dato = LocalDate.parse(strengDato, formatter);
-        }
-        catch (DateTimeParseException e) {
-        }
-        alert.setTitle("Statistisk");
-        alert.setHeaderText("Her er lidt statistik");
-        alert.setContentText("Samlet pris: " + Storage.getBestillinger().get(0).samletPris() + "\n" + "Pladser bestilt d. " + strengDato + ": " + Storage.getForestillinger().get(0).antalBestiltePladserPåDag(dato) + "\n" + "Bedste salgsdato for: " + forestilling.getNavn() + "= " + forestilling.succesDato());
-        alert.show();
-
-         */
 
         Forestilling forestilling = lvwForestillinger.getSelectionModel().getSelectedItem();
         Kunde kunde = lvwKunder.getSelectionModel().getSelectedItem();

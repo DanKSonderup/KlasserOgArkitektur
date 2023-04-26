@@ -18,7 +18,6 @@ public abstract class Storage {
     private static ArrayList<Forestilling> forestillinger = new ArrayList<>();
     private static ArrayList<Kunde> kunder = new ArrayList<>();
     private static ArrayList<Plads> pladser = new ArrayList<>();
-    private static ArrayList<Bestilling> bestillinger = new ArrayList<>();
 
     public static void storeForestilling (Forestilling forestilling) {
         forestillinger.add(forestilling);
@@ -40,11 +39,5 @@ public abstract class Storage {
 
     public static ArrayList<Plads> getPladser() {
         return new ArrayList<Plads>(pladser);
-    }
-    public static void storeBestilling (Bestilling bestilling) {
-        bestillinger.add(bestilling);
-    }
-    public static ArrayList<Bestilling> getBestillinger () {
-        return new ArrayList<Bestilling>(bestillinger);
     }
 }
