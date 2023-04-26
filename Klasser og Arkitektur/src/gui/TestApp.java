@@ -1,10 +1,7 @@
 package gui;
 
 import controller.Controller;
-import model.Forestilling;
-import model.Kunde;
-import model.Plads;
-import model.PladsType;
+import model.*;
 import storage.Storage;
 
 import java.time.LocalDate;
@@ -19,11 +16,11 @@ public class TestApp {
     }
 
     public static void initStorage() {
-        Controller.createForestilling("Evita", LocalDate.of(2023, 8, 10), LocalDate.of(2023, 8,20));
+        Forestilling forestilling = Controller.createForestilling("Evita", LocalDate.of(2023, 8, 10), LocalDate.of(2023, 8,20));
         Controller.createForestilling("Lykke Per", LocalDate.of(2023,9,1), LocalDate.of(2023,9,10));
         Controller.createForestilling("Chess", LocalDate.of(2023,8,21), LocalDate.of(2023,8,30));
 
-        Controller.createKunde("Anders", "11223344");
+        Kunde kunde = Controller.createKunde("Anders", "11223344");
         Controller.createKunde("Peter Jensen", "12345678");
         Controller.createKunde("Niels Madsen", "12341234");
 
