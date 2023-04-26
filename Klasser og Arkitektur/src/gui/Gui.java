@@ -80,12 +80,12 @@ public class Gui extends Application {
         Label lblStartDato = new Label("StartDato");
         pane.add(lblStartDato, 0,3);
         pane.add(txfStartDato,1,3);
-        txfStartDato.setPromptText("D/MM/YYYY");
+        txfStartDato.setPromptText("YYYY/MM/D");
 
         Label lblSlutDato = new Label("SlutDato");
         pane.add(lblSlutDato, 0,4);
         pane.add(txfSlutDato,1,4);
-        txfSlutDato.setPromptText("D/MM/YYYY");
+        txfSlutDato.setPromptText("YYYY/MM/D");
 
         // Tilføjer Opret forestilling Knap
         pane.add(btnOpretForestilling,1,5);
@@ -101,7 +101,7 @@ public class Gui extends Application {
         Label lblPladsDato = new Label("Dato");
         pane.add(lblPladsDato, 6,2);
         pane.add(txfPladsDato,7,2);
-        txfPladsDato.setPromptText("D/MM/YYYY");
+        txfPladsDato.setPromptText("YYYY/MM/D");
 
         // Tilføjer Opret kunde Knap
         pane.add(btnOpretKunde,4,4);
@@ -125,7 +125,7 @@ public class Gui extends Application {
 
     public void opretForestillingOnAction() {
         // Opretter dateTimeFormatter til at lave String om til LocalDate
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/d");
 
         String name = txfName.getText().trim();
         String StartDato = txfStartDato.getText().trim();
@@ -148,7 +148,7 @@ public class Gui extends Application {
             alert.setContentText("Udfyld venligst et navn, start og slut-dato");
             alert.show();
         } else if(startDate != null) {
-            if (slutDate.isAfter(startDate)) {
+            if (slutDate.isAfter(startDate) || slutDate.equals(startDate)) {
                 Controller.createForestilling(name, startDate, slutDate);
                 lvwForestillinger.getItems().setAll(Controller.getForestillinger());
                 txfName.clear();
@@ -187,7 +187,7 @@ public class Gui extends Application {
 
     public void opretBestillingOnAction() {
         // Opretter dateTimeFormatter til at lave String om til LocalDate
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/d");
 
         String strengDato = txfPladsDato.getText().trim();
         LocalDate dato = null;
@@ -220,7 +220,8 @@ public class Gui extends Application {
             } else {
                 error.setTitle("Kunne ikke oprettes");
                 error.setHeaderText("Din bestilling kunne ikke oprettes");
-                error.setContentText("Du har forsøgt at købe en plads på en ugyldig dato eller pladsen er allerede købt");
+                error.setContentText("Du har forsøgt at købe en eller flere pladser der er allerede " +
+                        "købt eller din indtastede dato er udenfor forestillingens tidsrum");
                 error.show();
             }
 

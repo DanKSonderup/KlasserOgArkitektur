@@ -62,13 +62,13 @@ public class Forestilling {
         int bedsteDag = 0;
         LocalDate successDato = startDato;
 
-        for (int i = 0; i < antalDage; i++) {
-           var solgtePladser = antalBestiltePladserPåDag(startDato.plusDays(i));
+        for (int i = 0; i <= antalDage; i++) {
+           LocalDate countDato = startDato.plusDays(i);
+           int solgtePladser = antalBestiltePladserPåDag(countDato);
            if (solgtePladser > bedsteDag) {
                bedsteDag = solgtePladser;
                successDato = startDato.plusDays(i);
            }
-
         }
         return successDato;
     }

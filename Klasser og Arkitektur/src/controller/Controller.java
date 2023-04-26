@@ -42,8 +42,18 @@ public abstract class Controller {
     public static ArrayList<Plads> getPladser() {
         return new ArrayList<Plads>(Storage.getPladser());
     }
-    public static int pladserBestiltForForestilling(Forestilling forestilling, LocalDate dato) {
+    public static int pladserBestiltForForestillingPåDag(Forestilling forestilling, LocalDate dato) {
         return forestilling.antalBestiltePladserPåDag(dato);
+    }
+    public static LocalDate getSuccesDatoForestilling(Forestilling forestilling) {
+        if (forestilling.getBestillinger().size() > 0) {
+            return forestilling.succesDato();
+        } else {
+            return null;
+        }
+    }
+    public static ArrayList<Plads> getPladserKøbtAfKundePåDato(Forestilling forestilling, Kunde kunde, LocalDate dato) {
+        return kunde.bestiltePladserTilForestillingPådag(forestilling, dato);
     }
 
     public static Bestilling opretBestillingMedPladser(Forestilling forestilling, Kunde kunde,
@@ -52,7 +62,7 @@ public abstract class Controller {
         Bestilling bestilling = null;
         boolean pladserLedige = true;
         // Tjekker om valgte datoer er gyldige for den pågældende forestilling
-        if (forestilling.getStartDato().isAfter(dato) && forestilling.getSlutDato().isBefore(dato)) {
+        if (forestilling.getStartDato().isAfter(dato) || forestilling.getSlutDato().isBefore(dato)) {
             pladserLedige = false;
         }
         int i = 0;
