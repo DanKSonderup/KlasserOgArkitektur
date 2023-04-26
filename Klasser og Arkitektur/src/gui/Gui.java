@@ -43,7 +43,6 @@ public class Gui extends Application {
     private final Button btnOpretKunde = new Button("Opret Kunde");
     private final Button btnOpretBestilling = new Button("Opret bestilling");
     private final Button btnStatistik = new Button("Statistik");
-    private final TextField txfTestDato = new TextField();
     private final Alert alert = new Alert(Alert.AlertType.INFORMATION);
     private final Alert success = new Alert(Alert.AlertType.CONFIRMATION);
     private final Alert error = new Alert(Alert.AlertType.ERROR);
@@ -103,8 +102,10 @@ public class Gui extends Application {
         pane.add(btnOpretKunde,4,4);
 
         pane.add(btnOpretBestilling, 7,3);
-        pane.add(btnStatistik, 7,6);
-        pane.add(txfTestDato,7,7);
+        pane.add(btnStatistik, 7,5);
+
+        Label lblStatistiskInfo = new Label("Du skal vælge Forestilling og kan \nvælge en kunde for at modtage statistisk");
+        pane.add(lblStatistiskInfo,7,6);
 
         lvwForestillinger.getItems().setAll(Controller.getForestillinger());
         lvwKunder.getItems().setAll(Controller.getKunder());
@@ -226,6 +227,7 @@ public class Gui extends Application {
             }
     }
     public void statistikOnAction() {
+        /*
         Forestilling forestilling = lvwForestillinger.getSelectionModel().getSelectedItem();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
         String strengDato = txfTestDato.getText().trim();
@@ -239,6 +241,19 @@ public class Gui extends Application {
         alert.setHeaderText("Her er lidt statistik");
         alert.setContentText("Samlet pris: " + Storage.getBestillinger().get(0).samletPris() + "\n" + "Pladser bestilt d. " + strengDato + ": " + Storage.getForestillinger().get(0).antalBestiltePladserPåDag(dato) + "\n" + "Bedste salgsdato for: " + forestilling.getNavn() + "= " + forestilling.succesDato());
         alert.show();
+
+         */
+
+        Forestilling forestilling = lvwForestillinger.getSelectionModel().getSelectedItem();
+        Kunde kunde = lvwKunder.getSelectionModel().getSelectedItem();
+
+        if (forestilling == null)
+            return;
+
+        StatistikWindow dialog = new StatistikWindow("Statistisk", forestilling, kunde);
+        dialog.showAndWait();
+
+        // Wait for the modal dialog to close
     }
 
 

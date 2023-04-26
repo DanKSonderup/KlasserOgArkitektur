@@ -46,33 +46,30 @@ public abstract class Controller {
     public static Bestilling opretBestillingMedPladser(Forestilling forestilling, Kunde kunde,
     LocalDate dato, ArrayList<Plads> pladser) {
 
+        Bestilling bestilling = null;
         boolean pladserLedige = true;
         // Tjekker om valgte datoer er gyldige for den pågældende forestilling
-        if (forestilling.getStartDato().isAfter(dato) || forestilling.getSlutDato().isBefore(dato)) {
+        if (forestilling.getStartDato().isAfter(dato) && forestilling.getSlutDato().isBefore(dato)) {
             pladserLedige = false;
         }
-
         int i = 0;
         while (pladserLedige && i < pladser.size()) {
             int række = pladser.get(i).getRække();
             int nr = pladser.get(i).getNr();
             pladserLedige = forestilling.erPladsLedig(række, nr, dato);
-            System.out.println(pladserLedige);
             i++;
         }
+
         if (pladserLedige) {
-            Bestilling bestilling = new Bestilling(dato, kunde, forestilling);
+            bestilling = new Bestilling(dato, kunde, forestilling);
             for (Plads e : pladser) {
                 bestilling.addPlads(e);
-                System.out.println(e);
             }
             forestilling.addBestilling(bestilling);
             Storage.storeBestilling(bestilling);
             kunde.addBestilling(bestilling);
-            return bestilling;
-        } else {
-            return null;
         }
+        return bestilling;
     }
 
 }

@@ -28,6 +28,10 @@ public class Kunde {
         return pladser;
     }
 
+    public String getNavn() {
+        return navn;
+    }
+
     @Override
     public String toString() {
         return  navn +  " (" + mobil + ")";

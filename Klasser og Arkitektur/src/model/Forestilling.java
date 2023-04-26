@@ -51,9 +51,7 @@ public class Forestilling {
         int antalPladser = 0;
         for (Bestilling bestilling: bestillinger) {
             if (bestilling.getDato().equals(dato)) {
-                for (Plads plads: bestilling.getPladser()) {
-                    antalPladser++;
-                }
+                antalPladser = bestilling.getPladser().size();
             }
         }
         return antalPladser;
@@ -61,21 +59,16 @@ public class Forestilling {
 
     public LocalDate succesDato() {
         int antalDage = slutDato.compareTo(startDato);
-        System.out.println("Antal dage: " + antalDage);
         int bedsteDag = 0;
         LocalDate successDato = startDato;
-        int solgtePladser = antalBestiltePladserPåDag(startDato);
-        System.out.println("Solgte pladser på startDato: " + solgtePladser);
 
         for (int i = 0; i < antalDage; i++) {
+           var solgtePladser = antalBestiltePladserPåDag(startDato.plusDays(i));
            if (solgtePladser > bedsteDag) {
                bedsteDag = solgtePladser;
-               System.out.println("Bedste dag: " + bedsteDag);
                successDato = startDato.plusDays(i);
            }
-        solgtePladser = antalBestiltePladserPåDag(startDato.plusDays(i));
-            System.out.println("Solgte pladser: " + solgtePladser);
-            System.out.println("i:" + i);
+
         }
         return successDato;
     }
