@@ -245,6 +245,9 @@ public class Gui extends Application {
         dialog.showAndWait();
 
         // Wait for the modal dialog to close
+        lvwForestillinger.getSelectionModel().clearSelection();
+        lvwKunder.getSelectionModel().clearSelection();
+        lvwPladser.getSelectionModel().clearSelection();
     }
 
 

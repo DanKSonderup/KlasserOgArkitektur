@@ -52,6 +52,7 @@ public class StatistikWindow extends Stage {
 
     private final Button btnBeregnStatistisk = new Button("Vis statistisk");
     private final Alert alert = new Alert(Alert.AlertType.INFORMATION);
+    private final Label lblKøbtePladserPåDag = new Label();
 
 
     private void initContent(GridPane pane) {
@@ -83,8 +84,8 @@ public class StatistikWindow extends Stage {
 
 
         if (kunde != null) {
-            Label lblKøbtePladserPåDag = new Label("Pladser købt af " + kunde.getNavn());
             pane.add(lblKøbtePladserPåDag,0,7);
+            lblKøbtePladserPåDag.setText("Pladser købt af " + kunde.getNavn());
             pane.add(lvwPladser,0,8);
             lvwPladser.setPrefHeight(100);
         }
@@ -103,10 +104,11 @@ public class StatistikWindow extends Stage {
         catch (DateTimeParseException e) {
         }
         if (dato != null) {
-            txfForestillingPladserPåDag.setText("" + Controller.pladserBestiltForForestillingPåDag(forestilling, dato));
+            txfForestillingPladserPåDag.setText("" + forestilling.antalBestiltePladserPåDag(dato));
             if (kunde != null) {
                 ArrayList<Plads> pladser = Controller.getPladserKøbtAfKundePåDato(forestilling,kunde,dato);
                 lvwPladser.getItems().setAll(pladser);
+                lblKøbtePladserPåDag.setText("Pladser købt af " + kunde.getNavn() + " (" + dato + ")");
             }
         } else {
             alert.setTitle("Beregn statistisk");

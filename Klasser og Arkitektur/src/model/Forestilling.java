@@ -51,7 +51,7 @@ public class Forestilling {
         int antalPladser = 0;
         for (Bestilling bestilling: bestillinger) {
             if (bestilling.getDato().equals(dato)) {
-                antalPladser = bestilling.getPladser().size();
+                antalPladser += bestilling.getPladser().size();
             }
         }
         return antalPladser;
