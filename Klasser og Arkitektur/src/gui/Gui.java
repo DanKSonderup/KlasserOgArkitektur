@@ -133,6 +133,7 @@ public class Gui extends Application {
         LocalDate startDate = null;
         LocalDate slutDate = null;
 
+        // Parser datostrengen gennem formatter, hvis den indtastede dato er ugyldig catcher vi DateTimeParseException
             try {
                 startDate = LocalDate.parse(StartDato, formatter);
                 slutDate = LocalDate.parse(SlutDato, formatter);

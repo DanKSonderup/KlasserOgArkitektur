@@ -60,7 +60,7 @@ public class Forestilling {
     public LocalDate succesDato() {
         int antalDage = slutDato.compareTo(startDato);
         int bedsteDag = 0;
-        LocalDate successDato = startDato;
+        LocalDate successDato = null;
 
         for (int i = 0; i <= antalDage; i++) {
            LocalDate countDato = startDato.plusDays(i);

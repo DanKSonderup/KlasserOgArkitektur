@@ -42,19 +42,6 @@ public abstract class Controller {
     public static ArrayList<Plads> getPladser() {
         return new ArrayList<Plads>(Storage.getPladser());
     }
-    public static int pladserBestiltForForestillingPåDag(Forestilling forestilling, LocalDate dato) {
-        return forestilling.antalBestiltePladserPåDag(dato);
-    }
-    public static LocalDate getSuccesDatoForestilling(Forestilling forestilling) {
-        if (forestilling.getBestillinger().size() > 0) {
-            return forestilling.succesDato();
-        } else {
-            return null;
-        }
-    }
-    public static ArrayList<Plads> getPladserKøbtAfKundePåDato(Forestilling forestilling, Kunde kunde, LocalDate dato) {
-        return kunde.bestiltePladserTilForestillingPådag(forestilling, dato);
-    }
 
     public static Bestilling opretBestillingMedPladser(Forestilling forestilling, Kunde kunde,
     LocalDate dato, ArrayList<Plads> pladser) {

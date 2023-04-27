@@ -1,6 +1,6 @@
 package gui;
 
-import controller.Controller;
+
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -78,7 +78,7 @@ public class StatistikWindow extends Stage {
         pane.add(lblSuccesDato,0,5);
         pane.add(txfSuccesDato,0,6);
         txfSuccesDato.setEditable(false);
-        if (Controller.getSuccesDatoForestilling(forestilling) != null) {
+        if (forestilling.succesDato() != null) {
             txfSuccesDato.setText("" + forestilling.succesDato());
         }
 
@@ -106,7 +106,7 @@ public class StatistikWindow extends Stage {
         if (dato != null) {
             txfForestillingPladserPåDag.setText("" + forestilling.antalBestiltePladserPåDag(dato));
             if (kunde != null) {
-                ArrayList<Plads> pladser = Controller.getPladserKøbtAfKundePåDato(forestilling,kunde,dato);
+                ArrayList<Plads> pladser = kunde.bestiltePladserTilForestillingPådag(forestilling,dato);
                 lvwPladser.getItems().setAll(pladser);
                 lblKøbtePladserPåDag.setText("Pladser købt af " + kunde.getNavn() + " (" + dato + ")");
             }
